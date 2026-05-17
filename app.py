@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify, render_template
-from tensorflow.keras.models import load_model
 from flask_cors import CORS
 import numpy as np
 from PIL import Image
 from io import BytesIO
 import cv2
 import base64
+import pickle
+with open("rf_model.pkl","rb") as f:
+    model = pickle.load(f)
 
 app = Flask(__name__)
 CORS(app)
@@ -13,7 +15,7 @@ CORS(app)
 # ===============================
 # LOAD MODEL
 # ===============================
-cnn = load_model("faceshape_model.h5")
+
 print("✅ Model loaded")
 
 # ===============================
@@ -136,7 +138,7 @@ def predict():
         img = np.array(img_resized) / 255.0
         img = np.expand_dims(img, axis=0)
 
-        pred = cnn.predict(img)[0]
+        pred = model.predict(img)[0]
 
         index = int(np.argmax(pred))
         confidence = float(np.max(pred))
