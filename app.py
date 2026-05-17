@@ -135,10 +135,9 @@ def predict():
         img_pil = Image.open(BytesIO(file.read())).convert('RGB')
         img_resized = img_pil.resize((128, 128))
 
-        img = np.array(img_resized) / 255.0
-        img = np.expand_dims(img, axis=0)
-
-        pred = model.predict(img)[0]
+        img = np.array(img_resized).flatten().reshape(1,-1)
+        
+        pred = model.predict_proba(img)[0]
 
         index = int(np.argmax(pred))
         confidence = float(np.max(pred))
