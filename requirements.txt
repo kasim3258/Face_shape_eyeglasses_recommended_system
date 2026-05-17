@@ -1,6 +1,6 @@
-flask
-opencv-python-headless
+flask==2.3.3
 numpy
 pillow
+opencv-python-headless
 scikit-learn
-tensorflow
+tensorflow-cpu
