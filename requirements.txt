@@ -1,7 +1,8 @@
-flask
-tensorflow
-opencv-python-headless
+flask==2.3.3
+flask-cors
 numpy
 pillow
+opencv-python-headless
 scikit-learn
+tensorflow-cpu==2.13.0
 gunicorn
