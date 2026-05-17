@@ -142,7 +142,7 @@ def predict():
         
         prediction = model.predict(img)[0]
 
-        shape = prediction
+        shape = str(prediction)
         confidence_percent = 95
         confidence = 0.95
 
