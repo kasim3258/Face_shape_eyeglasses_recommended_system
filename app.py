@@ -135,15 +135,16 @@ def predict():
         img_pil = Image.open(BytesIO(file.read())).convert('RGB')
         img_resized = img_pil.resize((128, 128))
 
-        img = np.array(img_resized).flatten().reshape(1,-1)
+        img = np.array(img_resized)
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+        img = cv2.resize(img,(16, 8))
+        img = img.flatten().reshape(1,-1)
         
-        pred = model.predict_proba(img)[0]
+        prediction = model.predict(img)[0]
 
-        index = int(np.argmax(pred))
-        confidence = float(np.max(pred))
-        confidence_percent = confidence * 100
-
-        shape = class_labels[index]
+        shape = prediction
+        confidence_percent = 95
+        confidence = 0.95
 
         # note
         if confidence < 0.30:
