@@ -1,7 +1,0 @@
-flask==2.3.3
-flask-cors
-numpy==1.26.4
-pillow
-opencv-python-headless
-scikit-learn
-gunicorn
